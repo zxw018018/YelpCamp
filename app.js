@@ -9,7 +9,7 @@ var express 	= require("express"),
 mongoose.connect("mongodb://localhost/yelp_camp_v3");
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
-
+app.use(express.static(__dirname + "/public"));
 seedDB();
 
 
@@ -93,7 +93,6 @@ app.post("/campgrounds/:id/comments", function(req, res){
 			res.redirect("/campgrounds");
 		} else {
 			//create new comment
-			
 			Comment.create(req.body.comment, function(err, comment){
 				if(err){
 					console.log(err);
@@ -109,10 +108,6 @@ app.post("/campgrounds/:id/comments", function(req, res){
 		}
 	})
 })
-
-
-
-
 
 
 
